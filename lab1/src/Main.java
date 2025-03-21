@@ -10,7 +10,7 @@ public class Main {
         String outputFile = "multiplication_benchmark.csv";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
-            writer.write("Size,StandardTime,StandardOps,BinetTime,BinetOps,HybridTime,HybridOps");
+            writer.write("Size,StandardTime,StandardOps,BinetTime,BinetOps,StrassenTime, StrassenOps, HybridTime,HybridOps");
             writer.newLine();
 
             for (int size : sizes) {

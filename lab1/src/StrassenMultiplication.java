@@ -1,5 +1,5 @@
 class StrassenMultiplication {
-    public static int operationCount = 0;
+    public static long operationCount = 0;
 
     public static double[][] multiply(double[][] A, double[][] B) {
         int n = A.length;

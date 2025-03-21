@@ -1,5 +1,5 @@
 class StrassenBinetMultiplication {
-    public static int operationCount = 0;
+    public static long operationCount = 0;
     private static int threshold;
 
     public static double[][] multiply(double[][] A, double[][] B, int l) {
