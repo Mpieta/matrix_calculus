@@ -18,8 +18,8 @@ def gauss_elimination_with_pivoting(A, b):
     A = A.astype(float)
     b = b.astype(float)
 
-    print_matrix(A, "Macierz poczatkowa A (14x14):")
-    print_matrix(b.reshape(-1, 1), "Wektor b (14x1):")
+    #print_matrix(A, "Macierz poczatkowa A (14x14):")
+    #print_matrix(b.reshape(-1, 1), "Wektor b (14x1):")
 
     # Macierz rozszerzona
     Ab = np.hstack([A, b.reshape(-1, 1)])
@@ -29,8 +29,8 @@ def gauss_elimination_with_pivoting(A, b):
         max_row = i + np.argmax(np.abs(Ab[i:, i]))
         if i != max_row:
             Ab[[i, max_row]] = Ab[[max_row, i]]
-            print(f"\nZamiana wierszy {i} i {max_row} (pivot):")
-            print_matrix(Ab, f"Macierz po zamianie wierszy")
+            #print(f"\nZamiana wierszy {i} i {max_row} (pivot):")
+            #print_matrix(Ab, f"Macierz po zamianie wierszy")
 
         # Normalizacja wiersza
         pivot = Ab[i][i]
@@ -38,26 +38,28 @@ def gauss_elimination_with_pivoting(A, b):
             print("Nie mozna znalezc niezerowego pivota — uklad może byc osobliwy.")
             continue
         Ab[i] = Ab[i] / pivot
-        print_matrix(Ab, f"Krok {i+1}: Normalizacja wiersza {i}")
+        #print_matrix(Ab, f"Krok {i+1}: Normalizacja wiersza {i}")
 
         # Eliminacja wierszy poniżej
         for j in range(i+1, n):
             factor = Ab[j][i]
             Ab[j] = Ab[j] - factor * Ab[i]
-            print_matrix(Ab, f"Eliminacja wiersza {j} (mnoznik = {factor:.2f})")
+            #print_matrix(Ab, f"Eliminacja wiersza {j} (mnoznik = {factor:.2f})")
 
-    print_matrix(Ab, "Macierz po eliminacji (forma schodkowa z pivotingiem):")
+    #print_matrix(Ab, "Macierz po eliminacji (forma schodkowa z pivotingiem):")
 
     # Rozwiązywanie przez podstawianie wsteczne
     x = np.zeros(n)
     for i in range(n-1, -1, -1):
         x[i] = Ab[i, -1] - np.dot(Ab[i, i+1:n], x[i+1:n])
-    print_matrix(x.reshape(-1, 1), "Rozwiazanie wektora x:")
+    #print_matrix(x.reshape(-1, 1), "Rozwiazanie wektora x:")
     return x
 
-# Przykład: generowanie danych całkowitych
-np.random.seed(0)
-A = np.random.randint(0, 50, size=(14, 14))
-b = np.random.randint(0, 50, size=(14,))
+if __name__ == "__main__":
 
-gauss_elimination_with_pivoting(A, b)
+    # Przykład: generowanie danych całkowitych
+    np.random.seed(0)
+    A = np.random.randint(0, 50, size=(14, 14))
+    b = np.random.randint(0, 50, size=(14,))
+
+    gauss_elimination_with_pivoting(A, b)

@@ -19,7 +19,7 @@ def lu_factorization_no_pivoting(A):
     L = np.eye(n)
     U = A.copy()
 
-    print_matrix(A, "Macierz wejsciowa A (14x14):")
+    #print_matrix(A, "Macierz wejsciowa A (14x14):")
 
     for i in range(n):
         pivot = U[i, i]
@@ -27,22 +27,23 @@ def lu_factorization_no_pivoting(A):
             print(f"Zerowy pivot na pozycji ({i},{i}) — brak pivotingu, może się nie udac.")
             continue
 
-        print(f"\nKrok {i+1}: Eliminacja w kolumnie {i}")
+        #print(f"\nKrok {i+1}: Eliminacja w kolumnie {i}")
         for j in range(i+1, n):
             multiplier = U[j, i] / pivot
             L[j, i] = multiplier
             U[j] = U[j] - multiplier * U[i]
-            print_matrix(U, f"U po eliminacji wiersza {j}")
-            print_matrix(L, f"L po zapisaniu mnoznika L[{j},{i}] = {multiplier:.2f}")
+            #print_matrix(U, f"U po eliminacji wiersza {j}")
+            #print_matrix(L, f"L po zapisaniu mnoznika L[{j},{i}] = {multiplier:.2f}")
 
-    print_matrix(L, "Macierz L (dolnotrojkatna):")
-    print_matrix(U, "Macierz U (gornotrojkatna):")
+    #print_matrix(L, "Macierz L (dolnotrojkatna):")
+    #print_matrix(U, "Macierz U (gornotrojkatna):")
 
     return L, U
 
-# Przykład: losowa macierz całkowita (0–9)
-np.random.seed(0)
-A = np.random.randint(1, 50, size=(14, 14))  # bez zer, żeby uniknąć problemów bez pivotingu
+if __name__ == "__main__":
+    # Przykład: losowa macierz całkowita (0–9)
+    np.random.seed(0)
+    A = np.random.randint(1, 50, size=(14, 14))  # bez zer, żeby uniknąć problemów bez pivotingu
 
-# Uruchomienie faktoryzacji LU
-L, U = lu_factorization_no_pivoting(A)
+    # Uruchomienie faktoryzacji LU
+    L, U = lu_factorization_no_pivoting(A)

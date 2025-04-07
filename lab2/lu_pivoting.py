@@ -21,7 +21,7 @@ def lu_factorization_with_pivoting(A):
     U = A.copy()
     P = np.eye(n)
 
-    print_matrix(A, "Macierz wejsciowa A (14x14):")
+    #print_matrix(A, "Macierz wejsciowa A (14x14):")
 
     for i in range(n):
         # Pivoting: znajdź największy element w kolumnie i (od wiersza i do końca)
@@ -35,9 +35,9 @@ def lu_factorization_with_pivoting(A):
             P[[i, max_row]] = P[[max_row, i]]
             if i > 0:
                 L[[i, max_row], :i] = L[[max_row, i], :i]
-            print(f"\nZamiana wierszy {i} <-> {max_row} (pivoting):")
-            print_matrix(U, "U po zamianie:")
-            print_matrix(P, "P po zamianie:")
+            #print(f"\nZamiana wierszy {i} <-> {max_row} (pivoting):")
+            #print_matrix(U, "U po zamianie:")
+            #print_matrix(P, "P po zamianie:")
 
         pivot = U[i, i]
 
@@ -46,21 +46,22 @@ def lu_factorization_with_pivoting(A):
             multiplier = U[j, i] / pivot
             L[j, i] = multiplier
             U[j] = U[j] - multiplier * U[i]
-            print_matrix(U, f"U po eliminacji wiersza {j}")
-            print_matrix(L, f"L po zapisaniu mnożnika L[{j},{i}] = {multiplier:.2f}")
+            #print_matrix(U, f"U po eliminacji wiersza {j}")
+            #print_matrix(L, f"L po zapisaniu mnożnika L[{j},{i}] = {multiplier:.2f}")
 
-    print_matrix(P, "Macierz permutacji P:")
-    print_matrix(L, "Macierz L (dolnotrojkatna):")
-    print_matrix(U, "Macierz U (gornotrojkatna):")
+    #print_matrix(P, "Macierz permutacji P:")
+    #print_matrix(L, "Macierz L (dolnotrojkatna):")
+    #print_matrix(U, "Macierz U (gornotrojkatna):")
 
     return P, L, U
 
-np.random.seed(0)
-A = np.random.randint(1, 50, size=(14, 14))
+if __name__ == "__main__":
+    np.random.seed(0)
+    A = np.random.randint(1, 50, size=(14, 14))
 
-P, L, U = lu_factorization_with_pivoting(A)
+    P, L, U = lu_factorization_with_pivoting(A)
 
 
-print_matrix(P @ A, "PA")
-print_matrix(L @ U, "LU")
-print("Czy PA = LU?", np.allclose(P @ A, L @ U))
+    print_matrix(P @ A, "PA")
+    print_matrix(L @ U, "LU")
+    print("Czy PA = LU?", np.allclose(P @ A, L @ U))
